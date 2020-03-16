@@ -6,13 +6,13 @@
 //  Copyright © 2020 Rafael Ferreira. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MovieListViewController.h"
 
-@interface ViewController ()
+@interface MovieListViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MovieListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -102,3 +102,5 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.gitignore.io/api/git,xcode,objective-c
+ObjectiveCMovieDB/.DS_Store
+.DS_Store
