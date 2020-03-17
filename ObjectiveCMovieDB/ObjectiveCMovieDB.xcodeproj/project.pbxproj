@@ -14,6 +14,9 @@
 		04770530241FF3AF003E6BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0477052F241FF3AF003E6BCC /* Assets.xcassets */; };
 		04770533241FF3AF003E6BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04770531241FF3AF003E6BCC /* LaunchScreen.storyboard */; };
 		04770536241FF3AF003E6BCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04770535241FF3AF003E6BCC /* main.m */; };
+		04EB433C242129FD00BC3D3D /* MovieDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */; };
+		04EB433F24212B9100BC3D3D /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */; };
+		04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434524214FE700BC3D3D /* DescriptionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,11 @@
 		04770532241FF3AF003E6BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04770534241FF3AF003E6BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04770535241FF3AF003E6BCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetail.storyboard; sourceTree = "<group>"; };
+		04EB433D24212B7A00BC3D3D /* MovieDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
+		04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
+		04EB434524214FE700BC3D3D /* DescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionCell.m; sourceTree = "<group>"; };
+		04EB434724214FF100BC3D3D /* DescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionCell.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,15 @@
 			path = ObjectiveCMovieDB;
 			sourceTree = "<group>";
 		};
+		04EB434424214FD100BC3D3D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04EB434724214FF100BC3D3D /* DescriptionCell.h */,
+				04EB434524214FE700BC3D3D /* DescriptionCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		2D22C874241FFB3F00029765 /* Movie list screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +122,8 @@
 		2D22C877241FFBEB00029765 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04EB434424214FD100BC3D3D /* Cells */,
+				04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -112,6 +131,8 @@
 		2D22C878241FFBFB00029765 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04EB433D24212B7A00BC3D3D /* MovieDetailViewController.h */,
+				04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -197,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EB433C242129FD00BC3D3D /* MovieDetail.storyboard in Resources */,
 				04770533241FF3AF003E6BCC /* LaunchScreen.storyboard in Resources */,
 				04770530241FF3AF003E6BCC /* Assets.xcassets in Resources */,
 				0477052E241FF3AC003E6BCC /* MovieList.storyboard in Resources */,
@@ -210,8 +232,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */,
 				0477052B241FF3AC003E6BCC /* MovieListViewController.m in Sources */,
 				04770525241FF3AC003E6BCC /* AppDelegate.m in Sources */,
+				04EB433F24212B9100BC3D3D /* MovieDetailViewController.m in Sources */,
 				04770536241FF3AF003E6BCC /* main.m in Sources */,
 				04770528241FF3AC003E6BCC /* SceneDelegate.m in Sources */,
 			);
