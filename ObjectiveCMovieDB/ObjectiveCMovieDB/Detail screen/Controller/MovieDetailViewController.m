@@ -38,7 +38,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"TA ENTRANDO AQUI OU NAO");
     int cellIdentifier = indexPath.row;
-    if (cellIdentifier == 2) {
+    
+    if (cellIdentifier == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header"];
+        return cell;
+    }
+    else if (cellIdentifier == 2) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"Description"];
         return cell;
     }
