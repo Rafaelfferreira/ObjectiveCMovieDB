@@ -16,6 +16,7 @@
 		2D22C87E24203B3E00029765 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C87D24203B3E00029765 /* MovieTableViewCell.m */; };
 		2D22C889242048E200029765 /* MovieListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C887242048E200029765 /* MovieListViewController.m */; };
 		2D22C8932421413E00029765 /* QTMovies.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C8922421413E00029765 /* QTMovies.m */; };
+		2DF3CC3524228E4700ED7AC5 /* MovieDBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF3CC3424228E4700ED7AC5 /* MovieDBAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		2D22C888242048E200029765 /* MovieListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieListViewController.h; sourceTree = "<group>"; };
 		2D22C8912421413E00029765 /* QTMovies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTMovies.h; sourceTree = "<group>"; };
 		2D22C8922421413E00029765 /* QTMovies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTMovies.m; sourceTree = "<group>"; };
+		2DF3CC3324228E2800ED7AC5 /* MovieDBAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDBAPI.h; sourceTree = "<group>"; };
+		2DF3CC3424228E4700ED7AC5 /* MovieDBAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDBAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,7 @@
 		04770522241FF3AC003E6BCC /* ObjectiveCMovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				2DF3CC3224228E0700ED7AC5 /* Network */,
 				2D22C874241FFB3F00029765 /* Movie list screen */,
 				2D22C875241FFB6B00029765 /* Detail screen */,
 				04770523241FF3AC003E6BCC /* AppDelegate.h */,
@@ -150,6 +154,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		2DF3CC3224228E0700ED7AC5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2DF3CC3324228E2800ED7AC5 /* MovieDBAPI.h */,
+				2DF3CC3424228E4700ED7AC5 /* MovieDBAPI.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,6 +236,7 @@
 				2D22C889242048E200029765 /* MovieListViewController.m in Sources */,
 				04770525241FF3AC003E6BCC /* AppDelegate.m in Sources */,
 				04770536241FF3AF003E6BCC /* main.m in Sources */,
+				2DF3CC3524228E4700ED7AC5 /* MovieDBAPI.m in Sources */,
 				2D22C8932421413E00029765 /* QTMovies.m in Sources */,
 				2D22C87E24203B3E00029765 /* MovieTableViewCell.m in Sources */,
 				04770528241FF3AC003E6BCC /* SceneDelegate.m in Sources */,
