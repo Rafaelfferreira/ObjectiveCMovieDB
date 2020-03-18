@@ -22,10 +22,11 @@
 }
 
 - (void) configure: (QTResult *) movie {
-    _movieTitle.text = [movie title];
-    _movieDescription.text = [movie overview];
-    _movieRating.text = [[NSNumber numberWithDouble: [movie voteAverage]] stringValue];
-    _movieCover.layer.cornerRadius = 10;
+    self.movieCover.image = [UIImage imageWithData:movie.coverData];
+    self.movieTitle.text = [movie title];
+    self.movieDescription.text = [movie overview];
+    self.movieRating.text = [[NSNumber numberWithDouble: [movie voteAverage]] stringValue];
+    self.movieCover.layer.cornerRadius = 10;
 }
 
 @end

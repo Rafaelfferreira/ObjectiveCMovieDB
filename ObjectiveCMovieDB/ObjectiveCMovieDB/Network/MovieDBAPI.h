@@ -20,5 +20,6 @@
 - (void) getPopularMovies: (void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
 - (void) getNowPlayingMovies: (void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
 - (void) getMoviesFromURL: (NSURL *_Nonnull) url completionHandler:(void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
+- (NSData * _Nullable) getCoverFrom: (NSString * _Nullable) coverPath;
 
 @end
