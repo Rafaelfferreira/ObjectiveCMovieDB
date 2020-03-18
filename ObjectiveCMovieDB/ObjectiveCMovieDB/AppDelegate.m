@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MovieDetailViewController.h"
 
 @interface AppDelegate ()
 

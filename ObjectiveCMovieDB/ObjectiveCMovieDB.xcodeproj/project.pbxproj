@@ -13,6 +13,11 @@
 		04770530241FF3AF003E6BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0477052F241FF3AF003E6BCC /* Assets.xcassets */; };
 		04770533241FF3AF003E6BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04770531241FF3AF003E6BCC /* LaunchScreen.storyboard */; };
 		04770536241FF3AF003E6BCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04770535241FF3AF003E6BCC /* main.m */; };
+		04EB433C242129FD00BC3D3D /* MovieDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */; };
+		04EB433F24212B9100BC3D3D /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */; };
+		04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434524214FE700BC3D3D /* DescriptionCell.m */; };
+		04EB434924215DF700BC3D3D /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434824215DF700BC3D3D /* HeaderCell.m */; };
+		04EB434C24228F5300BC3D3D /* OverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434B24228F5200BC3D3D /* OverviewCell.m */; };
 		2D22C87E24203B3E00029765 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C87D24203B3E00029765 /* MovieTableViewCell.m */; };
 		2D22C889242048E200029765 /* MovieListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C887242048E200029765 /* MovieListViewController.m */; };
 		2D22C8932421413E00029765 /* QTMovies.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C8922421413E00029765 /* QTMovies.m */; };
@@ -30,6 +35,15 @@
 		04770532241FF3AF003E6BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04770534241FF3AF003E6BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04770535241FF3AF003E6BCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetail.storyboard; sourceTree = "<group>"; };
+		04EB433D24212B7A00BC3D3D /* MovieDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
+		04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
+		04EB434524214FE700BC3D3D /* DescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionCell.m; sourceTree = "<group>"; };
+		04EB434724214FF100BC3D3D /* DescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionCell.h; sourceTree = "<group>"; };
+		04EB434824215DF700BC3D3D /* HeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
+		04EB434A24215E0100BC3D3D /* HeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		04EB434B24228F5200BC3D3D /* OverviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverviewCell.m; sourceTree = "<group>"; };
+		04EB434D24228F5E00BC3D3D /* OverviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverviewCell.h; sourceTree = "<group>"; };
 		2D22C87C24203B3E00029765 /* MovieTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
 		2D22C87D24203B3E00029765 /* MovieTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
 		2D22C887242048E200029765 /* MovieListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieListViewController.m; sourceTree = "<group>"; };
@@ -85,6 +99,19 @@
 			path = ObjectiveCMovieDB;
 			sourceTree = "<group>";
 		};
+		04EB434424214FD100BC3D3D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04EB434724214FF100BC3D3D /* DescriptionCell.h */,
+				04EB434524214FE700BC3D3D /* DescriptionCell.m */,
+				04EB434824215DF700BC3D3D /* HeaderCell.m */,
+				04EB434A24215E0100BC3D3D /* HeaderCell.h */,
+				04EB434B24228F5200BC3D3D /* OverviewCell.m */,
+				04EB434D24228F5E00BC3D3D /* OverviewCell.h */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		2D22C874241FFB3F00029765 /* Movie list screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +142,8 @@
 		2D22C877241FFBEB00029765 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04EB434424214FD100BC3D3D /* Cells */,
+				04EB433B242129FD00BC3D3D /* MovieDetail.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,6 +151,8 @@
 		2D22C878241FFBFB00029765 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04EB433D24212B7A00BC3D3D /* MovieDetailViewController.h */,
+				04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -220,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EB433C242129FD00BC3D3D /* MovieDetail.storyboard in Resources */,
 				04770533241FF3AF003E6BCC /* LaunchScreen.storyboard in Resources */,
 				04770530241FF3AF003E6BCC /* Assets.xcassets in Resources */,
 				0477052E241FF3AC003E6BCC /* MovieList.storyboard in Resources */,
@@ -233,8 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EB434C24228F5300BC3D3D /* OverviewCell.m in Sources */,
+				04EB434924215DF700BC3D3D /* HeaderCell.m in Sources */,
+				04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */,
 				2D22C889242048E200029765 /* MovieListViewController.m in Sources */,
 				04770525241FF3AC003E6BCC /* AppDelegate.m in Sources */,
+				04EB433F24212B9100BC3D3D /* MovieDetailViewController.m in Sources */,
 				04770536241FF3AF003E6BCC /* main.m in Sources */,
 				2DF3CC3524228E4700ED7AC5 /* MovieDBAPI.m in Sources */,
 				2D22C8932421413E00029765 /* QTMovies.m in Sources */,
