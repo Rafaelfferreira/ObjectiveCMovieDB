@@ -8,6 +8,7 @@
 
 #import "MovieListViewController.h"
 #import "MovieTableViewCell.h"
+#import "MovieDetailViewController.h"
 #import "MovieDBAPI.h"
 
 @interface MovieListViewController ()
@@ -125,6 +126,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 50;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _rowSelected = [indexPath row];
+    [self performSegueWithIdentifier: @"movieDetailsSegue" sender: self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //colocar aqui os dados a serem passados adiante
+    UINavigationController *nav = [segue destinationViewController];
+    MovieDetailViewController *detailsViewController = nav.topViewController;
+    detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
 }
 
 @end

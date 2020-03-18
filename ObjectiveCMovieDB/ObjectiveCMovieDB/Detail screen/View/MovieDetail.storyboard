@@ -154,7 +154,7 @@ Nam arcu mi, porttitor vel dictum eu, ullamcorper at odio. Vivamus ut ligula ant
         <!--Navigation Controller-->
         <scene sceneID="Y0r-lE-frk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aSe-cS-R8Z" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DetailsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aSe-cS-R8Z" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lmN-hz-aEI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
