@@ -18,6 +18,7 @@
 		04EB433F24212B9100BC3D3D /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB433E24212B9100BC3D3D /* MovieDetailViewController.m */; };
 		04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434524214FE700BC3D3D /* DescriptionCell.m */; };
 		04EB434924215DF700BC3D3D /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434824215DF700BC3D3D /* HeaderCell.m */; };
+		04EB434C24228F5300BC3D3D /* OverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB434B24228F5200BC3D3D /* OverviewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		04EB434724214FF100BC3D3D /* DescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionCell.h; sourceTree = "<group>"; };
 		04EB434824215DF700BC3D3D /* HeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
 		04EB434A24215E0100BC3D3D /* HeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		04EB434B24228F5200BC3D3D /* OverviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverviewCell.m; sourceTree = "<group>"; };
+		04EB434D24228F5E00BC3D3D /* OverviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverviewCell.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				04EB434524214FE700BC3D3D /* DescriptionCell.m */,
 				04EB434824215DF700BC3D3D /* HeaderCell.m */,
 				04EB434A24215E0100BC3D3D /* HeaderCell.h */,
+				04EB434B24228F5200BC3D3D /* OverviewCell.m */,
+				04EB434D24228F5E00BC3D3D /* OverviewCell.h */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EB434C24228F5300BC3D3D /* OverviewCell.m in Sources */,
 				04EB434924215DF700BC3D3D /* HeaderCell.m in Sources */,
 				04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */,
 				0477052B241FF3AC003E6BCC /* MovieListViewController.m in Sources */,

@@ -35,6 +35,14 @@
     return 3;
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == 1) {
+//        return 40;
+//    }
+//    
+//    return UITableViewAutomaticDimension;
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"TA ENTRANDO AQUI OU NAO");
     int cellIdentifier = indexPath.row;
@@ -47,7 +55,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"Description"];
         return cell;
     }
-    
+
     return [tableView dequeueReusableCellWithIdentifier:@"Overview"];
     
 }
