@@ -8,6 +8,7 @@
 
 #import "MovieListViewController.h"
 #import "MovieTableViewCell.h"
+#import "MovieDBAPI.h"
 
 @interface MovieListViewController ()
 
@@ -21,6 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
+    
+    MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
+    [movieDBAPI getNowPlayingMovies: ^(QTMovies *movies, NSError *error){
+        if (error == nil) {
+            //self.nowPlayingMovies = movies;
+            self.tableView.reloadData;
+        }
+    }];
     
     QTResult *movie1 = [[QTResult alloc] init];
     movie1.overview = @"bla bla bla";

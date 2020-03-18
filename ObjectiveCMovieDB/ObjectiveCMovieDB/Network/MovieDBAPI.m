@@ -16,25 +16,37 @@
     return self;
 }
 
-//- (NSData *) getDataFromURL: (NSURL *) url {
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//      if (error) {
-//        //NSLog(@"Error,%@", [error localizedDescription]);
-//      }
-//      else {
-//        //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-//      }
-//    }];
+- (void) getMoviesFromURL: (NSURL *) url completionHandler:(void(^)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler {
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL: url
+              completionHandler:^(NSData *data,
+                                  NSURLResponse *response,
+                                  NSError *error) {
+        if (error == nil) {
+            NSError *error;
+            QTMovies *movies = [QTMovies fromData:data error:&error];
+            completionHandler(movies, nil);
+        } else {
+            completionHandler(nil,error);
+        }
+                
+
+      }] resume];
+}
+
+- (void)getNowPlayingMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@", @"https://api.themoviedb.org/3/movie/now_playing?api_key=", self.apiKey, @"&language=en-US&page=1"]] completionHandler:^(QTMovies *movies, NSError *error) {
+        completionHandler(movies, error);
+    }];
+}
+
+//- (void) getNowPlayingMovies {
+
 //}
-//
-//- (QTMovies *) getNowPlayingMovies {
-//
-//}
-//
-//- (QTMovies *) getPopularMovies {
-//
-//}
+- (void)getPopularMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@", @"https://api.themoviedb.org/3/movie/popular?api_key=", self.apiKey, @"&language=en-US&page=1"]] completionHandler:^(QTMovies *movies, NSError *error) {
+        completionHandler(movies, error);
+    }];
+}
 
 @end
