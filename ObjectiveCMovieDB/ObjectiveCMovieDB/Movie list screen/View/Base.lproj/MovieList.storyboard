@@ -117,6 +117,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gXa-Oa-qlb"/>
                     <connections>
+                        <outlet property="loader" destination="ed8-QQ-rRU" id="P61-RC-P4P"/>
                         <outlet property="tableView" destination="cCd-9U-d65" id="moS-H0-6ie"/>
                         <segue destination="MK8-61-4wa" kind="show" identifier="movieDetailsSegue" id="P02-WU-lID"/>
                     </connections>
