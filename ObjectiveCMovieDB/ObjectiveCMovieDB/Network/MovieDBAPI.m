@@ -49,6 +49,51 @@
     }];
 }
 
+- (void) getMovieGenres: (QTResult *_Nonnull) movie completionHandler:(void(^_Nullable)(NSArray * _Nullable genres, NSError * _Nullable error))completionHandler {
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"%@%@%@",  @"https://api.themoviedb.org/3/genre/movie/list?api_key=",self.apiKey, @"&language=en-US"]];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL: url
+              completionHandler:^(NSData * data,
+                                  NSURLResponse * response,
+                                  NSError * error) {
+        if (error == nil) {
+            NSError *error;
+            @try {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData: data options:NSJSONReadingAllowFragments error: &error];
+                NSDictionary *genresDictionary = [jsonData valueForKeyPath:@"genres"];
+                
+                completionHandler(jsonData, error);
+            } @catch (NSException *exception) {
+                error = [NSError errorWithDomain:@"JSONSerialization" code:-1 userInfo:@{ @"exception": exception }];
+            }
+            
+            
+            
+//            NSArray *genres =
+        } else {
+            completionHandler(nil, error);
+        }
+    }] resume];
+    
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    [[session dataTaskWithURL: url
+//              completionHandler:^(NSData *data,
+//                                  NSURLResponse *response,
+//                                  NSError *error) {
+//        if (error == nil) {
+//            NSError *error;
+//            QTMovies *movies = [QTMovies fromData:data error:&error];
+//            completionHandler(movies, nil);
+//        } else {
+//            completionHandler(nil,error);
+//        }
+//
+//
+//      }] resume];
+}
+
+
 - (NSData * _Nullable) getCoverFrom: (NSString * _Nullable) coverPath {
     if (coverPath == nil) {
         return nil;

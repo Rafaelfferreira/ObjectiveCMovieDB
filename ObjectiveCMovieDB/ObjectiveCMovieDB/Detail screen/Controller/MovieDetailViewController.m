@@ -13,7 +13,11 @@
 
 @end
 
-@implementation MovieDetailViewController
+@implementation MovieDetailViewController {
+    NSString *genres;
+    BOOL requestDone;
+    BOOL requestError;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     //Precisa substituir o texto de back por um botao mesmo
@@ -28,6 +32,7 @@
     [self.movieDetailTableView setDelegate: self];
     [self.movieDetailTableView setDataSource: self];
     
+    [self getGenres];
 }
 - (IBAction)Back {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -38,7 +43,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"TA ENTRANDO AQUI OU NAO");
     int cellIdentifier = indexPath.row;
     
     if (cellIdentifier == 0) {
@@ -57,7 +61,14 @@
 }
 
 - (void)getGenres {
+    requestDone = NO;
+    requestError = NO;
+    genres = @"";
     
+    MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
+    [movieDBAPI getMovieGenres: _receivedMovie completionHandler:^(NSArray * _Nullable genres, NSError * _Nullable error) {
+        NSLog(genres);
+    }];
 }
 
 //- (void)getMoviesFromDB {

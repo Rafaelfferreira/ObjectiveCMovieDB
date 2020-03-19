@@ -10,6 +10,7 @@
 #import "QTMovies.h"
 #import "DescriptionCell.h"
 #import "HeaderCell.h"
+#import "MovieDBAPI.h"
 
 #ifndef MovieDetailViewController_h
 #define MovieDetailViewController_h
