@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QTMovies.h"
+#import "DescriptionCell.h"
+#import "HeaderCell.h"
 
 #ifndef MovieDetailViewController_h
 #define MovieDetailViewController_h
@@ -15,7 +18,7 @@
 @interface MovieDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *movieDetailTableView;
-
+@property QTResult *receivedMovie;
 
 
 @end

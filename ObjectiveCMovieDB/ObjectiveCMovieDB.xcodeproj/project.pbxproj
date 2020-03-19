@@ -104,8 +104,8 @@
 			children = (
 				04EB434724214FF100BC3D3D /* DescriptionCell.h */,
 				04EB434524214FE700BC3D3D /* DescriptionCell.m */,
-				04EB434824215DF700BC3D3D /* HeaderCell.m */,
 				04EB434A24215E0100BC3D3D /* HeaderCell.h */,
+				04EB434824215DF700BC3D3D /* HeaderCell.m */,
 				04EB434B24228F5200BC3D3D /* OverviewCell.m */,
 				04EB434D24228F5E00BC3D3D /* OverviewCell.h */,
 			);

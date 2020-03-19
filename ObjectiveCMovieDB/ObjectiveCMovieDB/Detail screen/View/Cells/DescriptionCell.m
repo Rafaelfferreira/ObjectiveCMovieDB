@@ -15,4 +15,8 @@
     [super awakeFromNib];
 }
 
+- (void) configure: (QTResult *) movie {
+    self.descriptionText.text = [movie valueForKey:@"overview"];
+}
+
 @end

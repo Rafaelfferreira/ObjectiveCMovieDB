@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QTMovies.h"
 
 #ifndef HeaderCell_h
 #define HeaderCell_h
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieGenres;
 @property (weak, nonatomic) IBOutlet UILabel *starRating;
 
-
+- (void) configure: (QTResult *) movie;
 
 @end
 

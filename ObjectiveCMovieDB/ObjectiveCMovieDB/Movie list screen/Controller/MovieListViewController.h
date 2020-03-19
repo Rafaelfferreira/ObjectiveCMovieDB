@@ -11,6 +11,7 @@
 @interface MovieListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property NSInteger rowSelected;
+@property NSInteger sectionSelected;
 @end
 
