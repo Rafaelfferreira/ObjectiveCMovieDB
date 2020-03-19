@@ -56,4 +56,64 @@
     
 }
 
+- (void)getGenres {
+    
+}
+
+//- (void)getMoviesFromDB {
+//    [self.tableView setHidden:YES];
+//    requestDone = NO;
+//    requestError = NO;
+//    popularMovies = [NSArray array];
+//    nowPlayingMovies = [NSArray array];
+//
+//    MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
+//    [movieDBAPI getNowPlayingMovies: ^(QTMovies *movies, NSError *error){
+//        if (error == nil) {
+//            self->nowPlayingMovies = [movies results];
+//            for (QTResult *movie in self->nowPlayingMovies) {
+//                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+//            }
+//            if (self->requestDone && !self->requestError) {
+//                dispatch_async(dispatch_get_main_queue(), ^(void){
+//                    //Run UI Updates
+//                    [self.tableView setHidden:NO];
+//                    [self.tableView reloadData];
+//                });
+//            } else {
+//                self->requestDone = YES;
+//            }
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^(void){
+//                [self showErrorAlert:error];
+//            });
+//            self->requestError = YES;
+//        }
+//    }];
+//
+//    [movieDBAPI getPopularMovies: ^(QTMovies *movies, NSError *error){
+//        if (error == nil) {
+//            self->popularMovies = [movies results];
+//            for (QTResult *movie in self->popularMovies) {
+//                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+//            }
+//            if (self->requestDone && !self->requestError) {
+//                dispatch_async(dispatch_get_main_queue(), ^(void){
+//                    //Run UI Updates
+//                    [self.tableView setHidden:NO];
+//                    [self.tableView reloadData];
+//                });
+//            } else {
+//                self->requestDone = YES;
+//            }
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^(void){
+//                [self showErrorAlert:error];
+//            });
+//            self->requestError = YES;
+//        }
+//    }];
+//}
+
+
 @end

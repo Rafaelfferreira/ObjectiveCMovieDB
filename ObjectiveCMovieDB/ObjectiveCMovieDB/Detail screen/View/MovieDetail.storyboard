@@ -55,6 +55,9 @@
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-ft-6Bq">
+                                                    <rect key="frame" x="241" y="152" width="40" height="31"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="xe1-Zq-zt2" secondAttribute="bottom" priority="999" id="2vQ-Ga-t7R"/>
@@ -64,6 +67,7 @@
                                                 <constraint firstItem="Snr-ls-JSC" firstAttribute="height" secondItem="zea-Lt-gMo" secondAttribute="height" multiplier="0.846743" id="Ngp-h3-FS5"/>
                                                 <constraint firstItem="xe1-Zq-zt2" firstAttribute="height" secondItem="Snr-ls-JSC" secondAttribute="height" multiplier="0.0904977" id="SWO-d3-foS"/>
                                                 <constraint firstItem="hoa-6J-5wf" firstAttribute="centerY" secondItem="Snr-ls-JSC" secondAttribute="centerY" multiplier="0.9" id="Uzs-bG-yOl"/>
+                                                <constraint firstItem="hC3-ft-6Bq" firstAttribute="centerX" secondItem="ZXb-1r-1rw" secondAttribute="centerX" multiplier="0.9" id="bCT-Wh-Guq"/>
                                                 <constraint firstItem="xe1-Zq-zt2" firstAttribute="leading" secondItem="Snr-ls-JSC" secondAttribute="trailing" constant="13" id="bun-oo-ASU"/>
                                                 <constraint firstItem="tye-Sr-Sf3" firstAttribute="centerY" secondItem="xe1-Zq-zt2" secondAttribute="centerY" id="cSz-kQ-CQI"/>
                                                 <constraint firstItem="tye-Sr-Sf3" firstAttribute="height" secondItem="Snr-ls-JSC" secondAttribute="height" multiplier="0.0678733" id="fH4-QX-I65"/>
@@ -72,6 +76,7 @@
                                                 <constraint firstItem="Snr-ls-JSC" firstAttribute="top" secondItem="zea-Lt-gMo" secondAttribute="topMargin" constant="18" id="kgy-Ug-0Ll"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Snr-ls-JSC" secondAttribute="bottom" id="l6k-gN-hiU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="hoa-6J-5wf" secondAttribute="trailing" constant="5" id="pL2-SX-Qaa"/>
+                                                <constraint firstItem="hC3-ft-6Bq" firstAttribute="centerY" secondItem="ZXb-1r-1rw" secondAttribute="centerY" id="sVi-VQ-oCO"/>
                                                 <constraint firstItem="hoa-6J-5wf" firstAttribute="leading" secondItem="Snr-ls-JSC" secondAttribute="trailing" constant="14" id="y21-fw-sFn"/>
                                                 <constraint firstItem="ZXb-1r-1rw" firstAttribute="leading" secondItem="Snr-ls-JSC" secondAttribute="trailing" constant="14" id="yRc-wC-cSl"/>
                                             </constraints>

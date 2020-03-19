@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *movieDetailTableView;
 @property QTResult *receivedMovie;
 
+- (void)getGenres;
 
 @end
 
