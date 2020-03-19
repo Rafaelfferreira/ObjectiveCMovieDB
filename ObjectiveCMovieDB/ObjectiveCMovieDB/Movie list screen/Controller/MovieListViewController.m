@@ -28,6 +28,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.loader.color = [UIColor colorNamed:@"LoaderColor"];
     
     [self getMoviesFromDB];
     
