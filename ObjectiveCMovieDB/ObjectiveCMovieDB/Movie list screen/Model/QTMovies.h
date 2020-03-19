@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) double voteAverage;
 @property (nonatomic, copy)   NSString *overview;
 @property (nonatomic, copy)   NSString *releaseDate;
+@property (nonatomic, copy)   NSData *coverData;
 @end
 
 NS_ASSUME_NONNULL_END

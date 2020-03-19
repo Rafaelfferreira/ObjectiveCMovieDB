@@ -49,4 +49,17 @@
     }];
 }
 
+- (NSData * _Nullable) getCoverFrom: (NSString * _Nullable) coverPath {
+    if (coverPath == nil) {
+        return nil;
+    } else {
+        NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://image.tmdb.org/t/p/w500", coverPath]];
+        if (url == nil) {
+            return nil;
+        } else {
+            return [NSData dataWithContentsOfURL:url];
+        }
+    }
+}
+
 @end

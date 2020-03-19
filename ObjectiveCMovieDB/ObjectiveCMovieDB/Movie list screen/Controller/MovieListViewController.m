@@ -18,48 +18,84 @@
 @implementation MovieListViewController {
     NSArray *popularMovies;
     NSArray *nowPlayingMovies;
+    BOOL requestDone;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
     
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView setHidden:YES];
+    requestDone = NO;
+    popularMovies = [NSArray array];
+    nowPlayingMovies = [NSArray array];
+    
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
     [movieDBAPI getNowPlayingMovies: ^(QTMovies *movies, NSError *error){
         if (error == nil) {
-            //self.nowPlayingMovies = movies;
-            self.tableView.reloadData;
+            self->nowPlayingMovies = [movies results];
+            for (QTResult *movie in self->nowPlayingMovies) {
+                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+            }
+            if (self->requestDone) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    //Run UI Updates
+                    [self.tableView setHidden:NO];
+                    [self.tableView reloadData];
+                });
+            } else {
+                self->requestDone = YES;
+            }
         }
     }];
     
-    QTResult *movie1 = [[QTResult alloc] init];
-    movie1.overview = @"bla bla bla";
-    movie1.voteAverage = 5.5;
-    movie1.title = @"hehe";
+    [movieDBAPI getPopularMovies: ^(QTMovies *movies, NSError *error){
+        if (error == nil) {
+            self->popularMovies = [movies results];
+            for (QTResult *movie in self->popularMovies) {
+                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+            }
+            if (self->requestDone) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    //Run UI Updates
+                    [self.tableView setHidden:NO];
+                    [self.tableView reloadData];
+                });
+            } else {
+                self->requestDone = YES;
+            }
+            
+        }
+    }];
     
-    QTResult *movie2 = [[QTResult alloc] init];
-    movie2.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lksj kj lksj lksjdlks jlkdj kljdlksj dlksdlskn dln lkdsn lkndlkn slkdnslkndl kn lndnskdnslkdnlkn lksdnslkndlks nlkdnslknd lknsdlkn lkdnlksnddlksnd lkndlkn lkdnslkndlk nldknslkdn lkndlksndkl snkdnkl nsklnd lk nlkd nskldnlsk";
-    movie2.voteAverage = 8.5;
-    movie2.title = @"Chica da silva";
+//    QTResult *movie1 = [[QTResult alloc] init];
+//    movie1.overview = @"bla bla bla";
+//    movie1.voteAverage = 5.5;
+//    movie1.title = @"hehe";
+//
+//    QTResult *movie2 = [[QTResult alloc] init];
+//    movie2.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lksj kj lksj lksjdlks jlkdj kljdlksj dlksdlskn dln lkdsn lkndlkn slkdnslkndl kn lndnskdnslkdnlkn lksdnslkndlks nlkdnslknd lknsdlkn lkdnlksnddlksnd lkndlkn lkdnslkndlk nldknslkdn lkndlksndkl snkdnkl nsklnd lk nlkd nskldnlsk";
+//    movie2.voteAverage = 8.5;
+//    movie2.title = @"Chica da silva";
+//
+//    QTResult *movie3 = [[QTResult alloc] init];
+//    movie3.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lks";
+//    movie3.voteAverage = 8.5;
+//    movie3.title = @"Chica";
+//
+//    QTResult *movie4 = [[QTResult alloc] init];
+//    movie4.overview = @"oi cueio";
+//    movie4.voteAverage = 8.5;
+//    movie4.title = @"Cueio";
     
-    QTResult *movie3 = [[QTResult alloc] init];
-    movie3.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lks";
-    movie3.voteAverage = 8.5;
-    movie3.title = @"Chica";
     
-    QTResult *movie4 = [[QTResult alloc] init];
-    movie4.overview = @"oi cueio";
-    movie4.voteAverage = 8.5;
-    movie4.title = @"Cueio";
-    
-    
-    popularMovies = [NSArray arrayWithObjects: movie1, movie2, nil];
-    
-    nowPlayingMovies = [NSArray arrayWithObjects: movie3, movie4, nil];
+//    popularMovies = [NSArray arrayWithObjects: movie1, movie2, nil];
+//
+//    nowPlayingMovies = [NSArray arrayWithObjects: movie3, movie4, nil];
     
     //[_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
     
     // Do any additional setup after loading the view.
 }
