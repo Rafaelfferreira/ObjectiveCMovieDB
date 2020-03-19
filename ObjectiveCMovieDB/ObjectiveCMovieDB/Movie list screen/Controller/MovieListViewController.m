@@ -19,6 +19,7 @@
     NSArray *popularMovies;
     NSArray *nowPlayingMovies;
     BOOL requestDone;
+    BOOL requestError;
 }
 
 - (void)viewDidLoad {
@@ -27,8 +28,15 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [self getMoviesFromDB];
+    
+}
+
+- (void)getMoviesFromDB {
     [self.tableView setHidden:YES];
     requestDone = NO;
+    requestError = NO;
     popularMovies = [NSArray array];
     nowPlayingMovies = [NSArray array];
     
@@ -39,7 +47,7 @@
             for (QTResult *movie in self->nowPlayingMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
-            if (self->requestDone) {
+            if (self->requestDone && !self->requestError) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     //Run UI Updates
                     [self.tableView setHidden:NO];
@@ -48,6 +56,11 @@
             } else {
                 self->requestDone = YES;
             }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self showErrorAlert:error];
+            });
+            self->requestError = YES;
         }
     }];
     
@@ -57,7 +70,7 @@
             for (QTResult *movie in self->popularMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
-            if (self->requestDone) {
+            if (self->requestDone && !self->requestError) {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     //Run UI Updates
                     [self.tableView setHidden:NO];
@@ -66,38 +79,27 @@
             } else {
                 self->requestDone = YES;
             }
-            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self showErrorAlert:error];
+            });
+            self->requestError = YES;
         }
     }];
-    
-//    QTResult *movie1 = [[QTResult alloc] init];
-//    movie1.overview = @"bla bla bla";
-//    movie1.voteAverage = 5.5;
-//    movie1.title = @"hehe";
-//
-//    QTResult *movie2 = [[QTResult alloc] init];
-//    movie2.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lksj kj lksj lksjdlks jlkdj kljdlksj dlksdlskn dln lkdsn lkndlkn slkdnslkndl kn lndnskdnslkdnlkn lksdnslkndlks nlkdnslknd lknsdlkn lkdnlksnddlksnd lkndlkn lkdnslkndlk nldknslkdn lkndlksndkl snkdnkl nsklnd lk nlkd nskldnlsk";
-//    movie2.voteAverage = 8.5;
-//    movie2.title = @"Chica da silva";
-//
-//    QTResult *movie3 = [[QTResult alloc] init];
-//    movie3.overview = @"chica sjdnlsdl lkjdflkd jlkj kj lkjdlk jdlskj lksdjl kjdlk jsdlk jslkdj lks";
-//    movie3.voteAverage = 8.5;
-//    movie3.title = @"Chica";
-//
-//    QTResult *movie4 = [[QTResult alloc] init];
-//    movie4.overview = @"oi cueio";
-//    movie4.voteAverage = 8.5;
-//    movie4.title = @"Cueio";
-    
-    
-//    popularMovies = [NSArray arrayWithObjects: movie1, movie2, nil];
-//
-//    nowPlayingMovies = [NSArray arrayWithObjects: movie3, movie4, nil];
-    
-    //[_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
-    
-    // Do any additional setup after loading the view.
+}
+
+- (void)showErrorAlert: (NSError*) error {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                   message:error.localizedDescription
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault
+       handler:^(UIAlertAction * action) {
+        [self getMoviesFromDB];
+    }];
+
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)setupNavBar {
