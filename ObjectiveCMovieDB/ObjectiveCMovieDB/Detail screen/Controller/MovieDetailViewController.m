@@ -17,8 +17,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     //Precisa substituir o texto de back por um botao mesmo
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"TESTE" style:UIBarButtonItemStylePlain target:self action: @selector(Back)];
-    self.navigationItem.leftBarButtonItem = backButton;
+//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"TESTE" style:UIBarButtonItemStylePlain target:self action: @selector(Back)];
+//    self.navigationItem.leftBarButtonItem = backButton;
     
 //    self.receivedMovie = [QTResult alloc];
 }

@@ -151,7 +151,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     // Background color
-    view.tintColor = [UIColor whiteColor];
+    view.tintColor = [UIColor colorNamed:@"HeaderColor"];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -174,8 +174,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //colocar aqui os dados a serem passados adiante
-    UINavigationController *nav = [segue destinationViewController];
-    MovieDetailViewController *detailsViewController = nav.topViewController;
+    MovieDetailViewController *detailsViewController = [segue destinationViewController];
     if (_sectionSelected == 0) {
         detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
     } else {
