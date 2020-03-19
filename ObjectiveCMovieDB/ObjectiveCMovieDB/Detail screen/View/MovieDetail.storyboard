@@ -136,7 +136,7 @@ Nam arcu mi, porttitor vel dictum eu, ullamcorper at odio. Vivamus ut ligula ant
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EyP-kl-lDk" firstAttribute="leading" secondItem="vMi-nH-mUC" secondAttribute="leading" id="C2k-m6-FTP"/>
                             <constraint firstItem="vMi-nH-mUC" firstAttribute="trailing" secondItem="EyP-kl-lDk" secondAttribute="trailing" id="hWQ-y9-cOm"/>
