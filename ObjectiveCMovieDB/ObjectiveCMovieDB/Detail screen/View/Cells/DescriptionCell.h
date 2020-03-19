@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QTMovies.h"
 
 #ifndef DescriptionCell_h
 #define DescriptionCell_h
@@ -15,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionText;
 
+
+- (void) configure: (QTResult *) movie;
 
 @end
 

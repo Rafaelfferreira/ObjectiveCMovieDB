@@ -20,7 +20,7 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"TESTE" style:UIBarButtonItemStylePlain target:self action: @selector(Back)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    self.receivedMovie = [QTResult alloc];
+//    self.receivedMovie = [QTResult alloc];
 }
 
 - (void)viewDidLoad {
@@ -37,24 +37,18 @@
     return 3;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row == 1) {
-//        return 40;
-//    }
-//    
-//    return UITableViewAutomaticDimension;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"TA ENTRANDO AQUI OU NAO");
     int cellIdentifier = indexPath.row;
     
     if (cellIdentifier == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header"];
+        HeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header"];
+        [cell configure: _receivedMovie];
         return cell;
     }
     else if (cellIdentifier == 2) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"Description"];
+        DescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier: @"Description"];
+        [cell configure: _receivedMovie];
         return cell;
     }
 

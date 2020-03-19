@@ -15,4 +15,11 @@
     [super awakeFromNib];
 }
 
+- (void)configure:(QTResult *)movie {
+    self.movieTitle.text = [movie valueForKey:@"title"];
+    self.starRating.text = [[NSNumber numberWithDouble: [movie voteAverage]] stringValue];
+    self.moviePoster.image = [UIImage imageWithData: movie.coverData];
+    self.moviePoster.layer.cornerRadius = 10;
+}
+
 @end

@@ -166,6 +166,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _rowSelected = [indexPath row];
+    _sectionSelected = [indexPath section];
     [self performSegueWithIdentifier: @"movieDetailsSegue" sender: self];
 }
 
@@ -173,7 +174,11 @@
     //colocar aqui os dados a serem passados adiante
     UINavigationController *nav = [segue destinationViewController];
     MovieDetailViewController *detailsViewController = nav.topViewController;
-    detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
+    if (_sectionSelected == 0) {
+        detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
+    } else {
+        detailsViewController.receivedMovie = [nowPlayingMovies objectAtIndex: _rowSelected];
+    }
 }
 
 @end
