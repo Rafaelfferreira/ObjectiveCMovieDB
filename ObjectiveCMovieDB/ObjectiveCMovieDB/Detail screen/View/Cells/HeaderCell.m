@@ -13,6 +13,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self.movieGenres setHidden: YES];
+    [self.activityIndicator setHidden: YES];
 }
 
 - (void)configure:(QTResult *)movie {
@@ -20,6 +22,11 @@
     self.starRating.text = [[NSNumber numberWithDouble: [movie voteAverage]] stringValue];
     self.moviePoster.image = [UIImage imageWithData: movie.coverData];
     self.moviePoster.layer.cornerRadius = 10;
+    self.movieGenres.text = [movie valueForKey:@"genresString"];
+    if(self.movieGenres != nil) {
+        [self.movieGenres setHidden: NO];
+        [self.activityIndicator setHidden: YES];
+    }
 }
 
 @end

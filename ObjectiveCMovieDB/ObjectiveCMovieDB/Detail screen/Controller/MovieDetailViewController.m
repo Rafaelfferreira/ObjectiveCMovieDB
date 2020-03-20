@@ -14,7 +14,7 @@
 @end
 
 @implementation MovieDetailViewController {
-    NSString *genres;
+//    NSString *genresString;
     BOOL requestDone;
     BOOL requestError;
 }
@@ -63,11 +63,12 @@
 - (void)getGenres {
     requestDone = NO;
     requestError = NO;
-    genres = @"";
     
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
     [movieDBAPI getMovieGenres: _receivedMovie completionHandler:^(NSArray * _Nullable genres, NSError * _Nullable error) {
-        NSLog(genres);
+        if (error == nil) {
+            _receivedMovie.genresString = [[genres valueForKey:@"description"] componentsJoinedByString:@", "];
+        }
     }];
 }
 

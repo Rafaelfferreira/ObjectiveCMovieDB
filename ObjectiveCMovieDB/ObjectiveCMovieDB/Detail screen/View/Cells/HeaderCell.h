@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *movieGenres;
 @property (weak, nonatomic) IBOutlet UILabel *starRating;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (void) configure: (QTResult *) movie;
 
