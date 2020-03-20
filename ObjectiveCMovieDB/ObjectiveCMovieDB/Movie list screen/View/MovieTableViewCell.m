@@ -22,7 +22,12 @@
 }
 
 - (void) configure: (QTResult *) movie {
-    self.movieCover.image = [UIImage imageWithData:movie.coverData];
+    if ([UIImage imageWithData:movie.coverData] != nil) {
+        self.movieCover.image = [UIImage imageWithData:movie.coverData];
+    } else {
+        self.movieCover.image = [UIImage imageNamed:@"noCover"];
+    }
+    
     self.movieTitle.text = [movie title];
     self.movieDescription.text = [movie overview];
     self.movieRating.text = [[NSNumber numberWithDouble: [movie voteAverage]] stringValue];

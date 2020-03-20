@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MovieListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MovieListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loader;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

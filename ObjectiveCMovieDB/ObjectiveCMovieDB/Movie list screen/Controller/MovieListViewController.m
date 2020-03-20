@@ -18,14 +18,17 @@
 @implementation MovieListViewController {
     NSArray *popularMovies;
     NSArray *nowPlayingMovies;
+    NSArray *searchedMovies;
     BOOL requestDone;
     BOOL requestError;
+    BOOL isSearching;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
     
+    isSearching = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.loader.color = [UIColor colorNamed:@"LoaderColor"];
@@ -38,6 +41,7 @@
     [self.tableView setHidden:YES];
     requestDone = NO;
     requestError = NO;
+    isSearching = NO;
     popularMovies = [NSArray array];
     nowPlayingMovies = [NSArray array];
     
@@ -89,6 +93,26 @@
     }];
 }
 
+- (void)searchMoviesInDB: (NSString *) text {
+    isSearching = YES;
+    searchedMovies = [NSArray array];
+    MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
+    [movieDBAPI search:text completionHandler:^(QTMovies *movies, NSError *error){
+        if (error == nil) {
+            self->searchedMovies = [movies results];
+            for (QTResult *movie in self->searchedMovies) {
+                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                //Run UI Updates
+                [self.tableView setHidden:NO];
+                [self.tableView reloadData];
+            });
+        }
+    }];
+    
+}
+
 - (void)showErrorAlert: (NSError*) error {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
                                    message:error.localizedDescription
@@ -110,6 +134,8 @@
     
     UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.navigationItem.searchController = searchController;
+    self.navigationItem.searchController.searchBar.delegate = self;
+    self.navigationItem.searchController.searchResultsUpdater = self;
     self.navigationItem.hidesSearchBarWhenScrolling = NO;
     searchController.obscuresBackgroundDuringPresentation = NO;
     
@@ -127,10 +153,15 @@
         reuseIdentifier: cellIdentifier];
     }
     
-    if (indexPath.section == 0) {
-        [cell configure: [popularMovies objectAtIndex: [indexPath row]]];
-    } else {
-        [cell configure: [nowPlayingMovies objectAtIndex: [indexPath row]]];
+    if (isSearching) {
+        [cell configure: [searchedMovies objectAtIndex: [indexPath row]]];
+    }
+    else {
+        if (indexPath.section == 0) {
+            [cell configure: [popularMovies objectAtIndex: [indexPath row]]];
+        } else {
+            [cell configure: [nowPlayingMovies objectAtIndex: [indexPath row]]];
+        }
     }
     
     
@@ -138,15 +169,25 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (isSearching) {
+        return 1;
+    }
+    else {
+        return 2;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
-        return [popularMovies count];
-    } else {
-        return [nowPlayingMovies count];
+    if (isSearching) {
+        return [searchedMovies count];
+    }
+    else {
+        if (section == 0) {
+            return [popularMovies count];
+        } else {
+            return [nowPlayingMovies count];
+        }
     }
 }
 
@@ -156,10 +197,15 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"Popular Movies";
-    } else {
-        return @"Now Playing Movies";
+    if (isSearching) {
+        return @"Results";
+    }
+    else {
+        if (section == 0) {
+            return @"Popular Movies";
+        } else {
+            return @"Now Playing Movies";
+        }
     }
 }
 
@@ -176,11 +222,38 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //colocar aqui os dados a serem passados adiante
     MovieDetailViewController *detailsViewController = [segue destinationViewController];
-    if (_sectionSelected == 0) {
-        detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
-    } else {
-        detailsViewController.receivedMovie = [nowPlayingMovies objectAtIndex: _rowSelected];
+    if (isSearching) {
+        detailsViewController.receivedMovie = [searchedMovies objectAtIndex: _rowSelected];
+    }
+    else {
+        if (_sectionSelected == 0) {
+            detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
+        } else {
+            detailsViewController.receivedMovie = [nowPlayingMovies objectAtIndex: _rowSelected];
+        }
     }
 }
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    if ([searchBar.text length] == 0) {
+        [self.tableView setHidden:YES];
+    }
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchBar.text length] >= 3) {
+        [self searchMoviesInDB:searchBar.text];
+    } else {
+        [self searchMoviesInDB:@""];
+    }
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    if (![searchController isActive]) {
+        [self.tableView setHidden:YES];
+        [self getMoviesFromDB];
+    }
+}
+
 
 @end
