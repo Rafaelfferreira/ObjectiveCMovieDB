@@ -50,6 +50,11 @@
 }
 
 - (void) getMovieGenres: (QTResult *_Nonnull) movie completionHandler:(void(^_Nullable)(NSArray * _Nullable genres, NSError * _Nullable error))completionHandler {
+    
+    __block NSSet *genreIDS = [NSSet setWithArray: [movie valueForKey:@"genreIDS"]];
+    __block NSArray *genresDictionary = [NSArray alloc];
+    __block NSMutableArray *genres = [[NSMutableArray alloc] init];
+    
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"%@%@%@",  @"https://api.themoviedb.org/3/genre/movie/list?api_key=",self.apiKey, @"&language=en-US"]];
     
     NSURLSession *session = [NSURLSession sharedSession];
@@ -61,15 +66,20 @@
             NSError *error;
             @try {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData: data options:NSJSONReadingAllowFragments error: &error];
-                NSDictionary *genresDictionary = [jsonData valueForKeyPath:@"genres"];
+                genresDictionary = [jsonData valueForKeyPath:@"genres"];
                 
-                completionHandler(jsonData, error);
+//                genresSet = [NSSet setWithArray:genresDictionary];
             } @catch (NSException *exception) {
                 error = [NSError errorWithDomain:@"JSONSerialization" code:-1 userInfo:@{ @"exception": exception }];
             }
             
             
-            
+            for (NSDictionary *genre in genresDictionary) {
+                if ([genreIDS containsObject:[genre valueForKey:@"id"]]) {
+                    [genres addObject: [genre valueForKey:@"name"]];
+                }
+            }
+            completionHandler(genres, error);
 //            NSArray *genres =
         } else {
             completionHandler(nil, error);
