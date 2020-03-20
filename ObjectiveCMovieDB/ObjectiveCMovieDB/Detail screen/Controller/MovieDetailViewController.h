@@ -10,6 +10,7 @@
 #import "QTMovies.h"
 #import "DescriptionCell.h"
 #import "HeaderCell.h"
+#import "MovieDBAPI.h"
 
 #ifndef MovieDetailViewController_h
 #define MovieDetailViewController_h
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *movieDetailTableView;
 @property QTResult *receivedMovie;
 
+- (void)getGenres;
 
 @end
 

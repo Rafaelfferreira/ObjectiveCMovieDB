@@ -21,6 +21,7 @@
 - (void) getNowPlayingMovies: (void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
 - (void) getMoviesFromURL: (NSURL *_Nonnull) url completionHandler:(void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
 - (void) search: (NSString *_Nonnull) text completionHandler:(void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
+- (void) getMovieGenres: (QTResult *_Nonnull) movie completionHandler:(void(^_Nullable)(NSArray * _Nullable genres, NSError * _Nullable error))completionHandler;
 - (NSData * _Nullable) getCoverFrom: (NSString * _Nullable) coverPath;
 
 @end

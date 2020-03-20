@@ -235,7 +235,9 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.tableView setHidden:YES];
+    if ([searchBar.text length] == 0) {
+        [self.tableView setHidden:YES];
+    }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

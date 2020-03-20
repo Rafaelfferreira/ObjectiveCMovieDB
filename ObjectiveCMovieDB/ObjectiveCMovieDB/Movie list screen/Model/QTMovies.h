@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)   NSString *originalLanguage;
 @property (nonatomic, copy)   NSString *originalTitle;
 @property (nonatomic, copy)   NSArray<NSNumber *> *genreIDS;
+@property (nonatomic, copy)   NSString *genresString;
 @property (nonatomic, copy)   NSString *title;
 @property (nonatomic, assign) double voteAverage;
 @property (nonatomic, copy)   NSString *overview;
