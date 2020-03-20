@@ -40,9 +40,6 @@
     }];
 }
 
-//- (void) getNowPlayingMovies {
-
-//}
 - (void)getPopularMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
     [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@", @"https://api.themoviedb.org/3/movie/popular?api_key=", self.apiKey, @"&language=en-US&page=1"]] completionHandler:^(QTMovies *movies, NSError *error) {
         completionHandler(movies, error);
@@ -60,6 +57,13 @@
             return [NSData dataWithContentsOfURL:url];
         }
     }
+}
+
+- (void)search:(NSString *)text completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+    NSString * stringToSearch = [text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@%@%@", @"https://api.themoviedb.org/3/search/movie?api_key=", self.apiKey, @"&language=en-US&query=", stringToSearch, @"&page=1&include_adult=false"]] completionHandler:^(QTMovies *movies, NSError *error) {
+        completionHandler(movies, error);
+    }];
 }
 
 @end
