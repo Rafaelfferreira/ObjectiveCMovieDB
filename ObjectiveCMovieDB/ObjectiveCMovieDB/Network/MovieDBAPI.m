@@ -64,8 +64,6 @@
             @try {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData: data options:NSJSONReadingAllowFragments error: &error];
                 genresDictionary = [jsonData valueForKeyPath:@"genres"];
-                
-//                genresSet = [NSSet setWithArray:genresDictionary];
             } @catch (NSException *exception) {
                 error = [NSError errorWithDomain:@"JSONSerialization" code:-1 userInfo:@{ @"exception": exception }];
             }
@@ -77,27 +75,10 @@
                 }
             }
             completionHandler(genres, error);
-//            NSArray *genres =
         } else {
             completionHandler(nil, error);
         }
     }] resume];
-    
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    [[session dataTaskWithURL: url
-//              completionHandler:^(NSData *data,
-//                                  NSURLResponse *response,
-//                                  NSError *error) {
-//        if (error == nil) {
-//            NSError *error;
-//            QTMovies *movies = [QTMovies fromData:data error:&error];
-//            completionHandler(movies, nil);
-//        } else {
-//            completionHandler(nil,error);
-//        }
-//
-//
-//      }] resume];
 }
 
 
