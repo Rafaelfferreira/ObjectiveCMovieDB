@@ -243,8 +243,6 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if ([searchBar.text length] >= 3) {
         [self searchMoviesInDB:searchBar.text];
-    } else {
-        [self searchMoviesInDB:@""];
     }
 }
 
