@@ -14,8 +14,10 @@
 @interface MovieDBAPI : NSObject
 
 @property (nonatomic, copy) NSString * _Nonnull apiKey;
+@property NSURLSession * _Nonnull urlSession;
+@property NSURLSessionDataTask * _Nullable dataTask;
 
-//- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+//- (NSURLSessionDataTask *_Nonnull)dataTaskWithURL:(NSURL *_Nullable)url completionHandler:(void (^_Nullable)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 - (void) getPopularMovies: (void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;
 - (void) getNowPlayingMovies: (void(^_Nullable)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler;

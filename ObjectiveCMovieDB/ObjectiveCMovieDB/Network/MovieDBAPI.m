@@ -13,12 +13,27 @@
 
 - (id)init {
     self.apiKey = @"ad28148852ee2cbbb8766d7babbf7c5e";
+    self.urlSession = [NSURLSession sharedSession];
     return self;
 }
 
+//- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler {
+//    
+//}
+
+
 - (void) getMoviesFromURL: (NSURL *) url completionHandler:(void(^)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler {
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL: url
+//    NSURLSession *session = [NSURLSession sharedSession];
+    //Cancela a task atual, se existir
+//    NSLog(@"STATE: %@",[_dataTask state]);
+//    if([_dataTask state] != 0){
+//        [_dataTask cancel];
+//    }
+    if(_dataTask != nil) {
+        [_dataTask cancel];
+    }
+    
+    _dataTask = [_urlSession dataTaskWithURL: url
               completionHandler:^(NSData *data,
                                   NSURLResponse *response,
                                   NSError *error) {
@@ -26,12 +41,12 @@
             NSError *error;
             QTMovies *movies = [QTMovies fromData:data error:&error];
             completionHandler(movies, nil);
-        } else {
+        } else if (error.code != -999) {
             completionHandler(nil,error);
         }
-                
-
-      }] resume];
+      }];
+    
+    [_dataTask resume];
 }
 
 - (void)getNowPlayingMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
