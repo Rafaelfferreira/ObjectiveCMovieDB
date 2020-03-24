@@ -244,7 +244,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (([indexPath section] == 1) && ([indexPath row] == ([nowPlayingMovies count]/2))) { // Load next page when half list was displayed
+    if (([indexPath section] == 1) && ([indexPath row] == ([nowPlayingMovies count] - 10))) { // Load next page when half page was displayed
         if (currentPage + 1 < totalPages)
             [self getNextPage];
     }
