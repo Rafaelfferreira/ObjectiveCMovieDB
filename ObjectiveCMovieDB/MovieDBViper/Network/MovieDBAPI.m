@@ -13,17 +13,12 @@
 
 - (id)init {
     self.apiKey = @"ad28148852ee2cbbb8766d7babbf7c5e";
-    self.urlSession = [NSURLSession sharedSession];
     return self;
 }
 
-//- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler {
-//    
-//}
-
-
 - (void) getMoviesFromURL: (NSURL *) url completionHandler:(void(^)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler {
-    _dataTask = [_urlSession dataTaskWithURL: url
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL: url
               completionHandler:^(NSData *data,
                                   NSURLResponse *response,
                                   NSError *error) {
@@ -31,12 +26,12 @@
             NSError *error;
             QTMovies *movies = [QTMovies fromData:data error:&error];
             completionHandler(movies, nil);
-        } else if (error.code != -999) {
+        } else {
             completionHandler(nil,error);
         }
-      }];
-    
-    [_dataTask resume];
+                
+
+      }] resume];
 }
 
 - (void)getNowPlayingMovies: (NSInteger) page completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
@@ -100,10 +95,10 @@
     }
 }
 
-- (void)search:(NSString *)text completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable, NSString * _Nullable))completionHandler {
+- (void)search:(NSString *)text completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
     NSString * stringToSearch = [text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@%@%@", @"https://api.themoviedb.org/3/search/movie?api_key=", self.apiKey, @"&language=en-US&query=", stringToSearch, @"&page=1&include_adult=false"]] completionHandler:^(QTMovies *movies, NSError *error) {
-        completionHandler(movies, error, stringToSearch);
+        completionHandler(movies, error);
     }];
 }
 
