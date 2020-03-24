@@ -17,8 +17,10 @@
 
 @implementation MovieListViewController {
     NSArray *popularMovies;
-    NSArray *nowPlayingMovies;
+    NSMutableArray *nowPlayingMovies;
     NSArray *searchedMovies;
+    NSInteger currentPage;
+    NSInteger totalPages;
     BOOL requestDone;
     BOOL requestError;
     BOOL isSearching;
@@ -29,6 +31,8 @@
     [self setupNavBar];
     
     isSearching = NO;
+    currentPage = 1;
+    totalPages = -1;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.loader.color = [UIColor colorNamed:@"LoaderColor"];
@@ -43,12 +47,14 @@
     requestError = NO;
     isSearching = NO;
     popularMovies = [NSArray array];
-    nowPlayingMovies = [NSArray array];
+    nowPlayingMovies = [NSMutableArray array];
     
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
-    [movieDBAPI getNowPlayingMovies: ^(QTMovies *movies, NSError *error){
+    NSInteger page = 1;
+    [movieDBAPI getNowPlayingMovies: page completionHandler:^(QTMovies *movies, NSError *error){
         if (error == nil) {
-            self->nowPlayingMovies = [movies results];
+            self->nowPlayingMovies = [NSMutableArray arrayWithArray:[movies results]];
+            self->totalPages = [movies totalPages];
             for (QTResult *movie in self->nowPlayingMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
@@ -91,6 +97,24 @@
             self->requestError = YES;
         }
     }];
+}
+
+- (void)getNextPage {
+    currentPage += 1;
+    MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
+    [movieDBAPI getNowPlayingMovies: currentPage completionHandler:^(QTMovies *movies, NSError *error){
+        if (error == nil) {
+            NSArray *results = [movies results];
+            for (QTResult *movie in results) {
+                movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
+                [self->nowPlayingMovies addObject:movie];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self.tableView reloadData];
+            });
+        }
+    }];
+    
 }
 
 - (void)searchMoviesInDB: (NSString *) text {
@@ -217,6 +241,13 @@
     _rowSelected = [indexPath row];
     _sectionSelected = [indexPath section];
     [self performSegueWithIdentifier: @"movieDetailsSegue" sender: self];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (([indexPath section] == 1) && ([indexPath row] == ([nowPlayingMovies count]/2))) { // Load next page when half list was displayed
+        if (currentPage + 1 < totalPages)
+            [self getNextPage];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
