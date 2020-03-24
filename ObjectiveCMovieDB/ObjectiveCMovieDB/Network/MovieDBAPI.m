@@ -23,16 +23,6 @@
 
 
 - (void) getMoviesFromURL: (NSURL *) url completionHandler:(void(^)(QTMovies * _Nullable movies, NSError * _Nullable error))completionHandler {
-//    NSURLSession *session = [NSURLSession sharedSession];
-    //Cancela a task atual, se existir
-//    NSLog(@"STATE: %@",[_dataTask state]);
-//    if([_dataTask state] != 0){
-//        [_dataTask cancel];
-//    }
-    if(_dataTask != nil) {
-        [_dataTask cancel];
-    }
-    
     _dataTask = [_urlSession dataTaskWithURL: url
               completionHandler:^(NSData *data,
                                   NSURLResponse *response,
@@ -110,10 +100,10 @@
     }
 }
 
-- (void)search:(NSString *)text completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+- (void)search:(NSString *)text completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable, NSString * _Nullable))completionHandler {
     NSString * stringToSearch = [text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@%@%@", @"https://api.themoviedb.org/3/search/movie?api_key=", self.apiKey, @"&language=en-US&query=", stringToSearch, @"&page=1&include_adult=false"]] completionHandler:^(QTMovies *movies, NSError *error) {
-        completionHandler(movies, error);
+        completionHandler(movies, error, stringToSearch);
     }];
 }
 

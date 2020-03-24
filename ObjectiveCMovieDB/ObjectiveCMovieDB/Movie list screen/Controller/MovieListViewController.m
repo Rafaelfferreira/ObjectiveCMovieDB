@@ -93,21 +93,22 @@
     }];
 }
 
-- (void)searchMoviesInDB: (NSString *) text {
+- (void)searchMoviesInDB: (NSString *) text completionHandler:(void (^_Nullable)(NSString * _Nonnull searchedText))completionHandler {
     isSearching = YES;
     searchedMovies = [NSArray array];
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
-    [movieDBAPI search:text completionHandler:^(QTMovies *movies, NSError *error){
+    [movieDBAPI search:text completionHandler:^(QTMovies *movies, NSError *error, NSString *movieTitle){
         if (error == nil) {
             self->searchedMovies = [movies results];
             for (QTResult *movie in self->searchedMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                //Run UI Updates
-                [self.tableView setHidden:NO];
-                [self.tableView reloadData];
-            });
+            completionHandler(text);
+//            dispatch_async(dispatch_get_main_queue(), ^(void){
+//                //Run UI Updates
+//                [self.tableView setHidden:NO];
+//                [self.tableView reloadData];
+//            });
         }
     }];
     
@@ -242,7 +243,15 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if ([searchBar.text length] >= 3) {
-        [self searchMoviesInDB:searchBar.text];
+        [self searchMoviesInDB:searchBar.text completionHandler:^(NSString * _Nonnull searchedText) {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                //Run UI Updates
+                if(searchedText == searchBar.text){
+                    [self.tableView setHidden:NO];
+                    [self.tableView reloadData];
+                }
+            });
+        }];
     }
 }
 
