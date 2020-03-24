@@ -104,11 +104,6 @@
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
             completionHandler(text);
-//            dispatch_async(dispatch_get_main_queue(), ^(void){
-//                //Run UI Updates
-//                [self.tableView setHidden:NO];
-//                [self.tableView reloadData];
-//            });
         }
     }];
     
@@ -242,16 +237,23 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if ([searchBar.text length] >= 3) {
-        [self searchMoviesInDB:searchBar.text completionHandler:^(NSString * _Nonnull searchedText) {
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                //Run UI Updates
-                if(searchedText == searchBar.text){
-                    [self.tableView setHidden:NO];
-                    [self.tableView reloadData];
-                }
-            });
-        }];
+    if ([searchBar.text length] >= 2) { //Only starts searching when the user has entered at least 2 characters
+        
+        //Waits 0.5 seconds before creating a request, this is done so that we dont create a request for each letter the user enters
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            if([searchText isEqualToString: searchBar.text]){
+                [self searchMoviesInDB:searchBar.text completionHandler:^(NSString * _Nonnull searchedText) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        //Run UI Updates
+                        //Double checks that the request that came back is what the user currently has written on the search bar
+                        if([searchedText isEqualToString:searchBar.text]){
+                            [self.tableView setHidden:NO];
+                            [self.tableView reloadData];
+                        }
+                    });
+                }];
+            }
+        });
     }
 }
 
