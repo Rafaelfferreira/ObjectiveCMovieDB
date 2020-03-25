@@ -39,14 +39,14 @@
     [_dataTask resume];
 }
 
-- (void)getNowPlayingMovies: (NSInteger) page completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
-    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@%@", @"https://api.themoviedb.org/3/movie/now_playing?api_key=", self.apiKey, @"&language=en-US&page=",[NSString stringWithFormat: @"%ld", (long)page]]] completionHandler:^(QTMovies *movies, NSError *error) {
+- (void)getNowPlayingMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@", @"https://api.themoviedb.org/3/movie/now_playing?api_key=", self.apiKey, @"&language=en-US&page=1"]] completionHandler:^(QTMovies *movies, NSError *error) {
         completionHandler(movies, error);
     }];
 }
 
-- (void)getPopularMovies:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
-    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@", @"https://api.themoviedb.org/3/movie/popular?api_key=", self.apiKey, @"&language=en-US&page=1"]] completionHandler:^(QTMovies *movies, NSError *error) {
+- (void)getPopularMovies:(NSInteger) page completionHandler:(void (^)(QTMovies * _Nullable, NSError * _Nullable))completionHandler {
+    [self getMoviesFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@%@", @"https://api.themoviedb.org/3/movie/popular?api_key=", self.apiKey, @"&language=en-US&page=",[NSString stringWithFormat: @"%ld", (long)page]]] completionHandler:^(QTMovies *movies, NSError *error) {
         completionHandler(movies, error);
     }];
 }
