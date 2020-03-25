@@ -10,13 +10,14 @@
 #import "MovieTableViewCell.h"
 #import "MovieDetailViewController.h"
 #import "MovieDBAPI.h"
+#import "NowPlayingTableViewCell.h"
 
 @interface MovieListViewController ()
 
 @end
 
 @implementation MovieListViewController {
-    NSArray *popularMovies;
+    NSMutableArray *popularMovies;
     NSMutableArray *nowPlayingMovies;
     NSArray *searchedMovies;
     NSInteger currentPage;
@@ -46,15 +47,14 @@
     requestDone = NO;
     requestError = NO;
     isSearching = NO;
-    popularMovies = [NSArray array];
+    popularMovies = [NSMutableArray array];
     nowPlayingMovies = [NSMutableArray array];
     
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
-    NSInteger page = 1;
-    [movieDBAPI getNowPlayingMovies: page completionHandler:^(QTMovies *movies, NSError *error){
+    
+    [movieDBAPI getNowPlayingMovies: ^(QTMovies *movies, NSError *error){
         if (error == nil) {
             self->nowPlayingMovies = [NSMutableArray arrayWithArray:[movies results]];
-            self->totalPages = [movies totalPages];
             for (QTResult *movie in self->nowPlayingMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
@@ -75,9 +75,11 @@
         }
     }];
     
-    [movieDBAPI getPopularMovies: ^(QTMovies *movies, NSError *error){
+    NSInteger page = 1;
+    [movieDBAPI getPopularMovies: page completionHandler:^(QTMovies *movies, NSError *error){
         if (error == nil) {
-            self->popularMovies = [movies results];
+            self->popularMovies = [NSMutableArray arrayWithArray:[movies results]];
+            self->totalPages = [movies totalPages];
             for (QTResult *movie in self->popularMovies) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
             }
@@ -102,12 +104,12 @@
 - (void)getNextPage {
     currentPage += 1;
     MovieDBAPI *movieDBAPI = [[MovieDBAPI alloc] init];
-    [movieDBAPI getNowPlayingMovies: currentPage completionHandler:^(QTMovies *movies, NSError *error){
+    [movieDBAPI getPopularMovies: currentPage completionHandler:^(QTMovies *movies, NSError *error){
         if (error == nil) {
             NSArray *results = [movies results];
             for (QTResult *movie in results) {
                 movie.coverData = [movieDBAPI getCoverFrom: movie.posterPath];
-                [self->nowPlayingMovies addObject:movie];
+                [self->popularMovies addObject:movie];
             }
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
@@ -164,28 +166,35 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    static NSString *cellIdentifier = @"movieCell";
-    
-    MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellIdentifier];
-    
-    if (cell == nil) {
-        return [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-        reuseIdentifier: cellIdentifier];
-    }
-    
-    if (isSearching) {
-        [cell configure: [searchedMovies objectAtIndex: [indexPath row]]];
-    }
-    else {
-        if (indexPath.section == 0) {
-            [cell configure: [popularMovies objectAtIndex: [indexPath row]]];
-        } else {
-            [cell configure: [nowPlayingMovies objectAtIndex: [indexPath row]]];
+    if (indexPath.section == 0 && !isSearching) {
+        static NSString *cellIdentifier = @"nowPlayingCell";
+        NowPlayingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+        
+        if (cell == nil) {
+            return [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+            reuseIdentifier: cellIdentifier];
         }
+        [cell configure: nowPlayingMovies];
+        cell.movieListViewController = self;
+        
+        return cell;
+        
+    } else {
+        static NSString *cellIdentifier = @"movieCell";
+        MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+        
+        if (cell == nil) {
+            return [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+            reuseIdentifier: cellIdentifier];
+        }
+        if (isSearching) {
+            [cell configure: [searchedMovies objectAtIndex: [indexPath row]]];
+        }else {
+            [cell configure: [popularMovies objectAtIndex: [indexPath row]]];
+        }
+        
+        return cell;
     }
-    
-    
-    return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -204,9 +213,9 @@
     }
     else {
         if (section == 0) {
-            return [popularMovies count];
+            return 1;
         } else {
-            return [nowPlayingMovies count];
+            return [popularMovies count];
         }
     }
 }
@@ -222,9 +231,9 @@
     }
     else {
         if (section == 0) {
-            return @"Popular Movies";
-        } else {
             return @"Now Playing Movies";
+        } else {
+            return @"Popular Movies";
         }
     }
 }
@@ -234,13 +243,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _rowSelected = [indexPath row];
-    _sectionSelected = [indexPath section];
-    [self performSegueWithIdentifier: @"movieDetailsSegue" sender: self];
+    if (isSearching || indexPath.section == 1) {
+        _rowSelected = [indexPath row];
+        _sectionSelected = [indexPath section];
+        [self performSegueWithIdentifier: @"movieDetailsSegue" sender: self];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (([indexPath section] == 1) && ([indexPath row] == ([nowPlayingMovies count] - 10))) { // Load next page when half page was displayed
+    if (([indexPath section] == 1) && ([indexPath row] == ([popularMovies count] - 10))) { // Load next page when half page was displayed
         if (currentPage + 1 < totalPages)
             [self getNextPage];
     }
@@ -254,9 +265,9 @@
     }
     else {
         if (_sectionSelected == 0) {
-            detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
-        } else {
             detailsViewController.receivedMovie = [nowPlayingMovies objectAtIndex: _rowSelected];
+        } else {
+            detailsViewController.receivedMovie = [popularMovies objectAtIndex: _rowSelected];
         }
     }
 }
