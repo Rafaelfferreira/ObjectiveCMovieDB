@@ -21,6 +21,8 @@
 		2D22C87E24203B3E00029765 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C87D24203B3E00029765 /* MovieTableViewCell.m */; };
 		2D22C889242048E200029765 /* MovieListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C887242048E200029765 /* MovieListViewController.m */; };
 		2D22C8932421413E00029765 /* QTMovies.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D22C8922421413E00029765 /* QTMovies.m */; };
+		2DCAA8F0242BCA5C0034B349 /* NowPlayingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCAA8EF242BCA5C0034B349 /* NowPlayingCollectionViewCell.m */; };
+		2DCAA8F3242BD0610034B349 /* NowPlayingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCAA8F2242BD0610034B349 /* NowPlayingTableViewCell.m */; };
 		2DF3CC3524228E4700ED7AC5 /* MovieDBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF3CC3424228E4700ED7AC5 /* MovieDBAPI.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,10 @@
 		2D22C888242048E200029765 /* MovieListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieListViewController.h; sourceTree = "<group>"; };
 		2D22C8912421413E00029765 /* QTMovies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTMovies.h; sourceTree = "<group>"; };
 		2D22C8922421413E00029765 /* QTMovies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTMovies.m; sourceTree = "<group>"; };
+		2DCAA8EE242BCA5C0034B349 /* NowPlayingCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingCollectionViewCell.h; sourceTree = "<group>"; };
+		2DCAA8EF242BCA5C0034B349 /* NowPlayingCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCollectionViewCell.m; sourceTree = "<group>"; };
+		2DCAA8F1242BD0610034B349 /* NowPlayingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingTableViewCell.h; sourceTree = "<group>"; };
+		2DCAA8F2242BD0610034B349 /* NowPlayingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingTableViewCell.m; sourceTree = "<group>"; };
 		2DF3CC3324228E2800ED7AC5 /* MovieDBAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDBAPI.h; sourceTree = "<group>"; };
 		2DF3CC3424228E4700ED7AC5 /* MovieDBAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDBAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,9 +175,8 @@
 		2D22C87A241FFCC500029765 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2DCAA8F4242BD09D0034B349 /* Cells */,
 				0477052C241FF3AC003E6BCC /* MovieList.storyboard */,
-				2D22C87C24203B3E00029765 /* MovieTableViewCell.h */,
-				2D22C87D24203B3E00029765 /* MovieTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +188,19 @@
 				2D22C887242048E200029765 /* MovieListViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2DCAA8F4242BD09D0034B349 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2D22C87C24203B3E00029765 /* MovieTableViewCell.h */,
+				2D22C87D24203B3E00029765 /* MovieTableViewCell.m */,
+				2DCAA8EE242BCA5C0034B349 /* NowPlayingCollectionViewCell.h */,
+				2DCAA8EF242BCA5C0034B349 /* NowPlayingCollectionViewCell.m */,
+				2DCAA8F1242BD0610034B349 /* NowPlayingTableViewCell.h */,
+				2DCAA8F2242BD0610034B349 /* NowPlayingTableViewCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		2DF3CC3224228E0700ED7AC5 /* Network */ = {
@@ -265,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCAA8F0242BCA5C0034B349 /* NowPlayingCollectionViewCell.m in Sources */,
 				04EB434C24228F5300BC3D3D /* OverviewCell.m in Sources */,
 				04EB434924215DF700BC3D3D /* HeaderCell.m in Sources */,
 				04EB434624214FE700BC3D3D /* DescriptionCell.m in Sources */,
@@ -275,6 +294,7 @@
 				2DF3CC3524228E4700ED7AC5 /* MovieDBAPI.m in Sources */,
 				2D22C8932421413E00029765 /* QTMovies.m in Sources */,
 				2D22C87E24203B3E00029765 /* MovieTableViewCell.m in Sources */,
+				2DCAA8F3242BD0610034B349 /* NowPlayingTableViewCell.m in Sources */,
 				04770528241FF3AC003E6BCC /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
